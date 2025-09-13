@@ -3,7 +3,7 @@ export const researchPapers = [
         title: "A Survey of Modern LLM Reasoning Frameworks",
         authors: "Hillol P Kalita (Advised by: Prof. Ferdous A. Barbhuiya)",
         year: 2025,
-        link: "#", // You can replace this with a link to the PDF if you host it
+        link: "https://drive.google.com/file/d/1VezekkZ-_9YJRTXZS_fBcUIZaL_GybDC/view?usp=drive_link",
         status: "spotlight",
         description: "This report reviews four seminal papers tracing the evolution of LLM reasoning, from foundational benchmarks to advanced frameworks, highlighting the critical gap between powerful static reasoning and adaptive strategic learning."
     },
