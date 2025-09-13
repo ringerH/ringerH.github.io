@@ -4,95 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hillol Pratim Kalita | AI Engineer</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.google.com/specimen/Inter?query=inter" rel="stylesheet">
+    <style>
+        /* Applying a modern, clean font */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        /* A subtle glow for section titles */
+        .section-title {
+            text-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-300">
 
-    <div class="container">
-        <header>
-            [cite_start]<h1 class="name">HILLOL PRATIM KALITA [cite: 1]</h1>
-            <p class="tagline">AI Engineer | Robotics & LLM Enthusiast</p>
-            <div class="contact-info">
-                <a href="mailto:hillol.klaita25m@iiitg.ac.in"><i class="fas fa-envelope"></i> Email</a>
-                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                [cite_start]<span><i class="fas fa-map-marker-alt"></i> Assam, India [cite: 2]</span>
+    <!-- Main container with padding and max-width for readability -->
+    <div class="container max-w-5xl mx-auto p-4 sm:p-8 lg:p-12">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white tracking-tight">HILLOL PRATIM KALITA</h1>
+            <p class="mt-2 text-lg sm:text-xl text-cyan-400">AI Engineer | Robotics & LLM Enthusiast</p>
+            
+            <!-- Contact information with icons and hover effects -->
+            <div class="mt-6 flex justify-center items-center flex-wrap gap-4 sm:gap-6 text-sm">
+                <a href="mailto:hillol.kalita25m@iiitg.ac.in" class="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300">
+                    <i class="fas fa-envelope fa-fw"></i>
+                    <!-- Corrected email typo -->
+                    <span>hillol.kalita25m@iiitg.ac.in</span>
+                </a>
+                <!-- NOTE: Add your LinkedIn URL here -->
+                <a href="#" class="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300">
+                    <i class="fab fa-linkedin fa-fw"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <!-- NOTE: Add your GitHub URL here -->
+                <a href="#" class="flex items-center gap-2 hover:text-cyan-400 transition-colors duration-300">
+                    <i class="fab fa-github fa-fw"></i>
+                    <span>GitHub</span>
+                </a>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt fa-fw"></i>
+                    <span>Assam, India</span>
+                </span>
             </div>
         </header>
 
         <main>
-            <section id="experience">
-                <h2>Experience</h2>
-                <article class="card">
-                    [cite_start]<h3>AI Intern (Robotics/LLM) [cite: 10]</h3>
-                    [cite_start]<p class="sub-heading">XuLabs, Carnegie Mellon University [cite: 11] | [cite_start]May-August 2024 (Remote) [cite: 15]</p>
-                    <ul>
-                        <li>Worked with Asst. [cite_start]Professor Jason Zhaoxin Fan, Institute of Automation, CAS under the direct supervision of Dr. Min Xu, CMU. [cite: 16]</li>
-                        [cite_start]<li>Engaged in the initial phase of proposing solutions to address the "lazy-plan" issue in Large Language Models for enhanced Robotics Integration. [cite: 17]</li>
-                    </ul>
-                </article>
-                <article class="card">
-                    [cite_start]<h3>Academic Research Intern (ML/NLP) [cite: 18]</h3>
-                    [cite_start]<p class="sub-heading">Jorhat Engineering College [cite: 19] | [cite_start]July-August 2023 [cite: 21]</p>
-                    <ul>
-                        [cite_start]<li>Designed and implemented a customized input pipeline utilizing the TensorFlow tf.data API. [cite: 22]</li>
-                        [cite_start]<li>Addressed data imbalance by applying class weights and implemented the CCE Loss Function for better optimization. [cite: 23]</li>
-                    </ul>
-                </article>
-            </section>
+            <!-- A two-column grid for better layout on larger screens -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-            <section id="projects">
-                <h2>Key Projects</h2>
-                <article class="card">
-                    [cite_start]<h3>TalentScout Hiring Assistant [cite: 25]</h3>
-                     [cite_start]<p class="sub-heading">August 2025 [cite: 26]</p>
-                    <ul>
-                        [cite_start]<li>Developed an intelligent AI hiring chatbot using the Gemini-1.5-Flash API to automate preliminary technical interviews. [cite: 27]</li>
-                        [cite_start]<li>Employed a deterministic State Machine to ensure required candidate data is collected in a specific order. [cite: 28]</li>
-                        [cite_start]<li>Utilized a multi-prompt strategy and modular codebase for scalability. [cite: 29, 30]</li>
-                    </ul>
-                </article>
-                <article class="card">
-                    [cite_start]<h3>RoadCraft - End-to-End Image Segmentation Model [cite: 31]</h3>
-                    [cite_start]<p class="sub-heading">March 2025 [cite: 33]</p>
-                    <ul>
-                        [cite_start]<li>Developed a U-Net model for semantic segmentation of road networks from satellite imagery. [cite: 32]</li>
-                        [cite_start]<li>Preprocessed image-mask pairs with OpenCV and Albumentations, using data augmentation to improve model robustness. [cite: 34]</li>
-                        [cite_start]<li>Achieved an average validation IoU of 0.85 on the Massachusetts Roads Dataset. [cite: 35]</li>
-                    </ul>
-                </article>
-            </section>
+                <!-- Left Column: Experience and Projects -->
+                <div class="lg:col-span-2 space-y-12">
+                    
+                    <!-- Experience Section -->
+                    <section id="experience">
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6 border-b-2 border-gray-700 pb-2 section-title">Experience</h2>
+                        <div class="space-y-8">
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-xl font-bold text-white">AI Intern (Robotics/LLM)</h3>
+                                <p class="sub-heading text-gray-400 mb-3">XuLabs, Carnegie Mellon University | May-August 2024 (Remote)</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>Worked with Asst. Professor Jason Zhaoxin Fan, Institute of Automation, CAS under the direct supervision of Dr. Min Xu, CMU.</li>
+                                    <li>Engaged in the initial phase of proposing solutions to address the "lazy-plan" issue in Large Language Models for enhanced Robotics Integration.</li>
+                                </ul>
+                            </article>
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-xl font-bold text-white">Academic Research Intern (ML/NLP)</h3>
+                                <p class="sub-heading text-gray-400 mb-3">Jorhat Engineering College | July-August 2023</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>Designed and implemented a customized input pipeline utilizing the TensorFlow tf.data API.</li>
+                                    <li>Addressed data imbalance by applying class weights and implemented the CCE Loss Function for better optimization.</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </section>
 
-            <section id="education">
-                <h2>Education</h2>
-                 <article class="card">
-                    [cite_start]<h3>M.Tech in Computer Science & Engineering [cite: 6]</h3>
-                    [cite_start]<p class="sub-heading">IIIT, Guwahati [cite: 6] | [cite_start]2025-2027 (expected) [cite: 13]</p>
-                </article>
-                <article class="card">
-                    [cite_start]<h3>B.Tech in Computer Science & Engineering [cite: 7]</h3>
-                    [cite_start]<p class="sub-heading">Jorhat Engineering College [cite: 7] | [cite_start]2021-2025 [cite: 14]</p>
-                    <ul>
-                        [cite_start]<li>CGPA: 8.37 [cite: 8]</li>
-                    </ul>
-                </article>
-            </section>
-            
-            <section id="achievements">
-                <h2>Scholastic Achievement</h2>
-                <article class="card">
-                    [cite_start]<h3>Winner HackVita 2.0 [cite: 38]</h3>
-                    [cite_start]<p class="sub-heading">Annual Hackathon, Jorhat Engineering College [cite: 38] | [cite_start]2024 [cite: 37]</p>
-                     <ul>
-                        [cite_start]<li>Project: SnapShot Object Tracking and Matching for surveillance and security. [cite: 39]</li>
-                    </ul>
-                </article>
-            </section>
+                    <!-- Projects Section -->
+                    <section id="projects">
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6 border-b-2 border-gray-700 pb-2 section-title">Key Projects</h2>
+                        <div class="space-y-8">
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-xl font-bold text-white">TalentScout Hiring Assistant</h3>
+                                <p class="sub-heading text-gray-400 mb-3">August 2025</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>Developed an intelligent AI hiring chatbot using the Gemini-1.5-Flash API to automate preliminary technical interviews.</li>
+                                    <li>Employed a deterministic State Machine to ensure required candidate data is collected in a specific order.</li>
+                                    <li>Utilized a multi-prompt strategy and modular codebase for scalability.</li>
+                                </ul>
+                            </article>
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-xl font-bold text-white">RoadCraft - End-to-End Image Segmentation Model</h3>
+                                <p class="sub-heading text-gray-400 mb-3">March 2025</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>Developed a U-Net model for semantic segmentation of road networks from satellite imagery.</li>
+                                    <li>Preprocessed image-mask pairs with OpenCV and Albumentations, using data augmentation to improve model robustness.</li>
+                                    <li>Achieved an average validation IoU of 0.85 on the Massachusetts Roads Dataset.</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </section>
+                </div>
 
+                <!-- Right Column: Education and Achievements -->
+                <div class="space-y-12">
+                    
+                    <!-- Education Section -->
+                    <section id="education">
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6 border-b-2 border-gray-700 pb-2 section-title">Education</h2>
+                        <div class="space-y-6">
+                             <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-lg font-bold text-white">M.Tech in Computer Science & Engineering</h3>
+                                <p class="sub-heading text-gray-400">IIIT, Guwahati | 2025-2027 (expected)</p>
+                            </article>
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-lg font-bold text-white">B.Tech in Computer Science & Engineering</h3>
+                                <p class="sub-heading text-gray-400 mb-2">Jorhat Engineering College | 2021-2025</p>
+                                <p class="text-gray-300">CGPA: 8.37</p>
+                            </article>
+                        </div>
+                    </section>
+                    
+                    <!-- Achievements Section -->
+                    <section id="achievements">
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6 border-b-2 border-gray-700 pb-2 section-title">Scholastic Achievement</h2>
+                         <div class="space-y-6">
+                            <article class="bg-gray-800/50 p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                                <h3 class="text-lg font-bold text-white">Winner HackVita 2.0</h3>
+                                <p class="sub-heading text-gray-400 mb-2">Annual Hackathon, Jorhat Engineering College | 2024</p>
+                                <p class="text-gray-300">Project: SnapShot Object Tracking and Matching for surveillance and security.</p>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </main>
 
-        <footer>
+        <!-- Footer Section -->
+        <footer class="text-center mt-16 text-sm text-gray-500">
             <p>&copy; 2025 Hillol Pratim Kalita. All Rights Reserved.</p>
         </footer>
     </div>
