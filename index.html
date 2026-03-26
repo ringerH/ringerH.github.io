@@ -1,81 +1,774 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hillol Pratim Kalita | AI Engineer</title>
-    
-    <!-- Tailwind CSS for utility classes -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+    <title>Hillol Pratim Kalita</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0c0c0e;
+            --surface: #141416;
+            --border: #222228;
+            --border-hover: #3a3a4a;
+            --text-primary: #e8e8f0;
+            --text-secondary: #7a7a8c;
+            --text-muted: #444455;
+            --accent: #6ee7b7;
+            --accent-dim: rgba(110, 231, 183, 0.08);
+            --accent-glow: rgba(110, 231, 183, 0.15);
+            --red: #f87171;
+        }
 
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css">
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- Main application logic (as a module) -->
-    <script type="module" src="app.js" defer></script>
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── GRAIN OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.35;
+        }
+
+        /* ── LAYOUT ── */
+        .site-wrap {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(12, 12, 14, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 28px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* ── HERO ── */
+        #hero {
+            padding-top: 140px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.1s forwards;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(44px, 7vw, 68px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-sub {
+            margin-top: 28px;
+            max-width: 520px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.35s forwards;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 24px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.5s forwards;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .hero-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .hero-link i { font-size: 13px; }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ── RESEARCH ── */
+        .spotlight-paper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
+            border-radius: 4px;
+            padding: 28px 32px;
+            margin-bottom: 32px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .spotlight-paper:hover {
+            border-left-color: var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .spotlight-tag {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 3px 8px;
+            border-radius: 2px;
+            margin-bottom: 14px;
+        }
+
+        .paper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.4;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .paper-title:hover { color: var(--accent); }
+
+        .paper-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .paper-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .subsection-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            margin-top: 40px;
+        }
+
+        .paper-list { display: flex; flex-direction: column; gap: 2px; }
+
+        .paper-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: padding-left 0.2s;
+        }
+
+        .paper-row:last-child { border-bottom: none; }
+
+        .paper-row:hover { padding-left: 8px; }
+
+        .paper-row:hover .paper-row-title { color: var(--accent); }
+
+        .paper-row-year {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            min-width: 36px;
+            flex-shrink: 0;
+        }
+
+        .paper-row-content { flex: 1; }
+
+        .paper-row-title {
+            font-size: 13.5px;
+            color: var(--text-primary);
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .paper-row-authors {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            display: block;
+        }
+
+        .paper-row-status {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .status-reading {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.08);
+        }
+
+        .status-read {
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* ── PROJECTS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .project-icon {
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        .project-arrow {
+            font-size: 11px;
+            color: var(--text-muted);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .project-card:hover .project-arrow {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
+
+        .project-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .project-desc {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 2px 7px;
+            border-radius: 2px;
+        }
+
+        .project-placeholder {
+            border: 1px dashed var(--border);
+            border-radius: 4px;
+            padding: 40px 24px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .project-placeholder p {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ── BLOG ── */
+        .blog-list { display: flex; flex-direction: column; }
+
+        .blog-post {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            align-items: baseline;
+            gap: 24px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: padding-left 0.2s;
+        }
+
+        .blog-post:first-child { border-top: 1px solid var(--border); }
+
+        .blog-post:hover { padding-left: 10px; }
+
+        .blog-post:hover .blog-title { color: var(--accent); }
+
+        .blog-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .blog-title {
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: color 0.2s;
+        }
+
+        .blog-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 2px 7px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 520px) {
+            .blog-post { grid-template-columns: 1fr; gap: 6px; }
+        }
+
+        .coming-soon-note {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 48px 0 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .footer-copy span { color: var(--accent); }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text-primary); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── CURSOR DOT ── */
+        .cursor-dot {
+            position: fixed;
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, opacity 0.3s;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
-        
-        <!-- Header Section -->
-        <header class="text-center mb-16 md:mb-24">
-            <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight">Hillol Pratim Kalita</h1>
-            <p class="text-xl md:text-2xl text-sky-500 mt-2">Software Engineer | LLM Research</p>
-            <div class="mt-6 flex justify-center items-center space-x-6 text-gray-600">
-                <a href="mailto:hillol.kalita25m@iiitg.ac.in" class="hover:text-sky-500 transition-colors"><i class="fas fa-envelope mr-2"></i>Email</a>
-                <a href="https://www.linkedin.com/in/hillol-pratim-kalita-4a62b3300" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 transition-colors"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
-                <a href="https://github.com/ringerH" target="_blank" rel="noopener noreferrer" class="hover:text-sky-500 transition-colors"><i class="fab fa-github mr-2"></i>GitHub</a>
+    <div class="cursor-dot" id="cursor"></div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">hpk<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="site-wrap">
+
+        <!-- HERO -->
+        <section id="hero">
+            <p class="hero-eyebrow">Based in Assam, India &nbsp;·&nbsp; IIIT Guwahati</p>
+            <h1>Hillol Pratim<br>Kalita</h1>
+            <p class="hero-sub">
+                Software Engineer researching the reasoning and security landscape of large language models. 
+                Interested in how LLMs think, fail, and can be made more robust.
+            </p>
+            <div class="hero-links">
+                <a href="mailto:hillol.kalita25m@iiitg.ac.in" class="hero-link">
+                    <i class="fas fa-envelope"></i> hillol.kalita25m@iiitg.ac.in
+                </a>
+                <a href="https://www.linkedin.com/in/hillol-pratim-kalita-4a62b3300" target="_blank" class="hero-link">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/ringerH" target="_blank" class="hero-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
             </div>
-        </header>
+        </section>
 
-        <main class="space-y-16 md:space-y-24">
-            
-            <!-- Projects Section -->
-            <section id="projects">
-                <h2 class="section-title">Development Projects</h2>
-                
-                <!-- Filter buttons will be here. This is just a placeholder. -->
-                <div id="project-filters" class="flex flex-wrap gap-2 mb-8">
-                    <button class="filter-btn-placeholder">All</button>
-                    <button class="filter-btn-placeholder">LLM</button>
-                    <button class="filter-btn-placeholder">Computer Vision</button>
-                    <button class="filter-btn-placeholder">Development</button>
-                </div>
+        <hr class="section-divider">
 
-                <!-- The project cards will be dynamically injected here by app.js -->
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Placeholder message -->
-                    <p class="text-gray-500 md:col-span-2">Project data is not loaded yet. This section will be populated in the next step.</p>
-                </div>
-            </section>
+        <!-- RESEARCH -->
+        <section id="research">
+            <div class="section-header reveal">
+                <span class="section-label">§01</span>
+                <h2>Research</h2>
+            </div>
 
-            <!-- Research Section -->
-            <section id="research">
-                <h2 class="section-title">Research Log</h2>
-                
-                <!-- This container will be populated by app.js with your paper list -->
-                <div id="research-log">
-                    <!-- Content will be injected here -->
+            <!-- Spotlight -->
+            <div class="spotlight-paper reveal">
+                <span class="spotlight-tag">Featured Work</span>
+                <a href="https://drive.google.com/file/d/1VezekkZ-_9YJRTXZS_fBcUIZaL_GybDC/view?usp=drive_link" target="_blank" class="paper-title">
+                    A Survey of Modern LLM Reasoning Frameworks
+                </a>
+                <p class="paper-meta">Hillol P Kalita · Advised by Prof. Ferdous A. Barbhuiya · 2025</p>
+                <p class="paper-desc">
+                    Reviews four seminal papers tracing the evolution of LLM reasoning — from foundational benchmarks to advanced frameworks — 
+                    highlighting the critical gap between powerful static reasoning and adaptive strategic learning.
+                </p>
+            </div>
+
+            <!-- Currently reading -->
+            <p class="subsection-title reveal">Reading Queue</p>
+            <div class="paper-list reveal">
+                <!-- add status="reading" papers here -->
+            </div>
+
+            <!-- Archive -->
+            <p class="subsection-title reveal">Archive</p>
+            <div class="paper-list reveal">
+                <a href="https://arxiv.org/abs/2502.02390v2" target="_blank" class="paper-row">
+                    <span class="paper-row-year">2025</span>
+                    <span class="paper-row-content">
+                        <span class="paper-row-title">CoAT: Chain-of-Associated-Thoughts Framework for Enhancing LLM Reasoning</span>
+                        <span class="paper-row-authors">J. Pan, S. Deng, S. Huang</span>
+                    </span>
+                    <span class="paper-row-status status-read">Read</span>
+                </a>
+                <a href="https://arxiv.org/abs/2402.12348v2" target="_blank" class="paper-row">
+                    <span class="paper-row-year">2024</span>
+                    <span class="paper-row-content">
+                        <span class="paper-row-title">GTBENCH: Uncovering the Strategic Reasoning Limitations of LLMs via Game-Theoretic Evaluations</span>
+                        <span class="paper-row-authors">J. Duan, R. Zhang, J. Diffenderfer, et al.</span>
+                    </span>
+                    <span class="paper-row-status status-read">Read</span>
+                </a>
+                <a href="https://arxiv.org/abs/2201.11903v6" target="_blank" class="paper-row">
+                    <span class="paper-row-year">2022</span>
+                    <span class="paper-row-content">
+                        <span class="paper-row-title">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</span>
+                        <span class="paper-row-authors">J. Wei, X. Wang, D. Schuurmans, et al.</span>
+                    </span>
+                    <span class="paper-row-status status-read">Read</span>
+                </a>
+                <a href="https://arxiv.org/abs/2110.14168v2" target="_blank" class="paper-row">
+                    <span class="paper-row-year">2021</span>
+                    <span class="paper-row-content">
+                        <span class="paper-row-title">Training Verifiers to Solve Math Word Problems</span>
+                        <span class="paper-row-authors">K. Cobbe, H. Jun, J. Hilton, et al.</span>
+                    </span>
+                    <span class="paper-row-status status-read">Read</span>
+                </a>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <div class="section-header reveal">
+                <span class="section-label">§02</span>
+                <h2>Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Example project cards — replace with real data -->
+                <!--
+                <a href="#" class="project-card">
+                    <div class="project-card-header">
+                        <span class="project-icon"><i class="fas fa-shield-halved"></i></span>
+                        <span class="project-arrow"><i class="fas fa-arrow-up-right"></i></span>
+                    </div>
+                    <span class="project-name">Project Name</span>
+                    <p class="project-desc">Short description of what the project does and why it matters.</p>
+                    <div class="project-tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </a>
+                -->
+
+                <div class="project-placeholder">
+                    <p>// projects coming soon</p>
                 </div>
-            </section>
-            
-        </main>
-        
-        <footer class="text-center mt-16 md:mt-24 text-gray-500 text-sm">
-            <p>&copy; 2025 Hillol Pratim Kalita. All Rights Reserved.</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- BLOG -->
+        <section id="blog">
+            <div class="section-header reveal">
+                <span class="section-label">§03</span>
+                <h2>Writing</h2>
+            </div>
+
+            <div class="blog-list reveal">
+                <!-- Example entries — uncomment and fill in when you have posts
+                <a href="#" class="blog-post">
+                    <span class="blog-date">Jun 2025</span>
+                    <span class="blog-title">Why LLMs Fail at Strategic Deception</span>
+                    <span class="blog-tag">Research</span>
+                </a>
+                <a href="#" class="blog-post">
+                    <span class="blog-date">May 2025</span>
+                    <span class="blog-title">Notes on Chain-of-Thought and Its Limits</span>
+                    <span class="blog-tag">Notes</span>
+                </a>
+                -->
+                <p class="coming-soon-note">// first post loading...</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2025 Hillol Pratim Kalita <span>·</span> IIIT Guwahati</p>
+                <div class="footer-links">
+                    <a href="mailto:hillol.kalita25m@iiitg.ac.in"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/hillol-pratim-kalita-4a62b3300" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/ringerH" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
         </footer>
-        
+
     </div>
+
+    <script>
+        // Cursor dot
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top  = e.clientY + 'px';
+        });
+        document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+        document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
-
